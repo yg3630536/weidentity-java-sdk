@@ -16,6 +16,15 @@ do
     shift
 done
 
+# check the os version
+check_os_version
+	
+# check the jdk version
+check_jdk_version
+	
+# check the gradle version
+check_gradle_version
+
 if [ ! -d "$classpathDir" ];
 then
 	echo "ERROR: you need use -c to specify your right classpath."
@@ -49,7 +58,7 @@ function checkCommand(){
 # check the os version
 function check_os_version() {
 	echo "----------------------------"
-	echo "1. begin check the os version"
+	echo "1. OS Version"
 	echo "----------------------------"
 	checkCommand uname
 	if [ $? == 1 ] ; then
@@ -62,7 +71,7 @@ function check_os_version() {
 # check the jdk version
 function check_jdk_version() {
 	echo "----------------------------"
-	echo "2. begin check the jdk version"
+	echo "2. JDK Version"
 	echo "----------------------------"
 	checkCommand java
 	if [ $? == 1 ] ; then
@@ -77,7 +86,7 @@ location of your Java installation."
 # check the gradle version
 function check_gradle_version() {
 	echo "----------------------------"
-	echo "3. begin check the gradle version"
+	echo "3. Gradle Version"
 	echo "----------------------------"
 	checkCommand gradle
 	if [ $? == 1 ] ; then
@@ -92,7 +101,7 @@ location of your Gradle installation."
 # check the user configure
 function check_user_config() {
 	echo "----------------------------"
-	echo "4. begin check the user config"
+	echo "4. User Config"
 	echo "----------------------------"
 	if [ ! -f "$fisco_properties" ];
 	then
@@ -110,7 +119,7 @@ function check_user_config() {
 	then
 		echo "ERROR: the ca.crt does not exists."
 	else
-		echo "the ca.crt is exists."		
+		echo "the ca.crt is exists and the MD5 is `md5sum ca.crt  | cut -d " " -f1`"		
 	fi
 	
 	bcos_version=$(grep "bcos.version" $fisco_properties |awk -F"=" '{print $2}')
@@ -120,7 +129,7 @@ function check_user_config() {
 		then
 			echo "ERROR: the client.keystore does not exists."
 		else
-			echo "the client.keystore is exists."			
+			echo "the client.keystore is exists and the MD5 is `md5sum client.keystore  | cut -d " " -f1`"		
 		fi
 	elif [[ $bcos_version == 2* ]];
 	then
@@ -128,13 +137,13 @@ function check_user_config() {
 		then
 			echo "ERROR: the node.crt does not exists."
 		else
-			echo "the node.crt is exists."				
+			echo "the node.crt is exists and the MD5 is `md5sum node.crt  | cut -d " " -f1`"			
 		fi
 		if [ ! -f "$node_key" ];
 		then
 			echo "ERROR: the node.key does not exists."
 		else
-			echo "the node.key is exists."			
+			echo "the node.key is exists and the MD5 is `md5sum node.key  | cut -d " " -f1`"		
 		fi
 	else
 		echo "ERROR: the bcos.version value is invalid."
@@ -167,7 +176,7 @@ function check_user_config() {
 # check the jar version
 function  check_jar_version() {
 	echo "----------------------------"
-	echo "5. begin check the jar version"
+	echo "5. Dependencies Jar Version"
 	echo "----------------------------" 
 	bcos_version=$(grep "bcos.version" $fisco_properties |awk -F"=" '{print $2}')
 	echo "the bcos version is: $bcos_version"
@@ -202,7 +211,7 @@ function  check_jar_version() {
 # check the node version
 function check_node_version() {
 	echo "----------------------------"
-	echo "6. begin check the node"
+	echo "6. FISCO BCOS Version"
 	echo "----------------------------"
 	isSdk=1
 	version_default=1.4
@@ -254,16 +263,6 @@ function get_the_version() {
 }
 
 function main() {
-	echo "begin check the version..."
-	# check the os version
-	check_os_version
-	
-	# check the jdk version
-	check_jdk_version
-	
-	# check the gradle version
-	check_gradle_version
-	
 	# check the user config
 	check_user_config
 	
