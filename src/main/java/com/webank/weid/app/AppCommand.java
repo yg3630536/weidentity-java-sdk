@@ -92,7 +92,7 @@ public class AppCommand {
             System.err.println("block chain nodes connected successfully. ");
             System.err.println("the FISCO-BCOS version is: " + version);
             int blockNumer = BaseService.getBlockNumber();
-            System.out.println("the current blockNumer is: " + blockNumer);
+            System.err.println("the current blockNumer is: " + blockNumer);
         } catch (InitWeb3jException e) {
             System.err.println("ERROR: initWeb3j error:" + e.getMessage());
             logger.error("[checkVersion] checkVersion with exception.", e);

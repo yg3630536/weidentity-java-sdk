@@ -16,35 +16,6 @@ do
     shift
 done
 
-# check the os version
-check_os_version
-	
-# check the jdk version
-check_jdk_version
-	
-# check the gradle version
-check_gradle_version
-
-if [ ! -d "$classpathDir" ];
-then
-	echo "ERROR: you need use -c to specify your right classpath."
-	exit 0
-fi
-if [ ! -d "$libDir" ];
-then
-	echo "ERROR: you need use -l to specify your libDir."
-	exit 0
-fi
-
-
-fisco_properties="$classpathDir/fisco.properties"
-weidentity_properties="$classpathDir/weidentity.properties"
-ca_crt="$classpathDir/ca.crt"
-client_keystore="$classpathDir/client.keystore"
-node_crt="$classpathDir/node.crt"
-node_key="$classpathDir/node.key"
-sdk_version=
-
 # check the command is exists
 function checkCommand(){
     if type $1 >/dev/null 2>&1
@@ -111,6 +82,38 @@ function check_fisco_solc_version() {
 	fi
 }
 
+# check the os version
+check_os_version
+	
+# check the jdk version
+check_jdk_version
+	
+# check the gradle version
+check_gradle_version
+
+# check the fisco-solc version
+check_fisco_solc_version
+
+if [ ! -d "$classpathDir" ];
+then
+	echo "ERROR: you need use -c to specify your right classpath."
+	exit 0
+fi
+if [ ! -d "$libDir" ];
+then
+	echo "ERROR: you need use -l to specify your libDir."
+	exit 0
+fi
+
+
+fisco_properties="$classpathDir/fisco.properties"
+weidentity_properties="$classpathDir/weidentity.properties"
+ca_crt="$classpathDir/ca.crt"
+client_keystore="$classpathDir/client.keystore"
+node_crt="$classpathDir/node.crt"
+node_key="$classpathDir/node.key"
+sdk_version=
+
 # check the user configure
 function check_user_config() {
 	echo "----------------------------"
@@ -132,7 +135,7 @@ function check_user_config() {
 	then
 		echo "ERROR: the ca.crt does not exists."
 	else
-		echo "the ca.crt is exists and the MD5 is `md5sum ca.crt  | cut -d " " -f1`"		
+		echo "the ca.crt is exists and the MD5 is `md5sum $ca_crt  | cut -d " " -f1`"		
 	fi
 	
 	bcos_version=$(grep "bcos.version" $fisco_properties |awk -F"=" '{print $2}')
@@ -142,7 +145,7 @@ function check_user_config() {
 		then
 			echo "ERROR: the client.keystore does not exists."
 		else
-			echo "the client.keystore is exists and the MD5 is `md5sum client.keystore  | cut -d " " -f1`"		
+			echo "the client.keystore is exists and the MD5 is `md5sum $client_keystore  | cut -d " " -f1`"		
 		fi
 	elif [[ $bcos_version == 2* ]];
 	then
@@ -150,13 +153,13 @@ function check_user_config() {
 		then
 			echo "ERROR: the node.crt does not exists."
 		else
-			echo "the node.crt is exists and the MD5 is `md5sum node.crt  | cut -d " " -f1`"			
+			echo "the node.crt is exists and the MD5 is `md5sum $node_crt  | cut -d " " -f1`"			
 		fi
 		if [ ! -f "$node_key" ];
 		then
 			echo "ERROR: the node.key does not exists."
 		else
-			echo "the node.key is exists and the MD5 is `md5sum node.key  | cut -d " " -f1`"		
+			echo "the node.key is exists and the MD5 is `md5sum $node_key  | cut -d " " -f1`"		
 		fi
 	else
 		echo "ERROR: the bcos.version value is invalid."
@@ -168,7 +171,7 @@ function check_user_config() {
 	echo "the current nodes: $nodes"
 	
 	OLD_IFS="$IFS"
-    IFS=";"
+    IFS=","
     array=($nodes)
     IFS="$OLD_IFS"
     for var in ${array[@]}
@@ -229,7 +232,7 @@ function  check_jar_version() {
 			for file in ./dist/app/*
 			do
 				file=${file##*/}
-				if [[ $file == weid-java-sdk* ]];
+				if [[ $file == *.jar ]];
 				then
 					echo "the weid java sdk jar: $file"
 				fi
@@ -268,7 +271,7 @@ function check_node_version() {
 			for file in ./dist/app/*
 			do
 				file=${file##*/}
-				if [[ $file == weid-java-sdk* ]];
+				if [[ $file == *.jar ]];
 				then
 					get_the_version $file
 					if [ `echo "$sdk_version < $version_default" | bc` -eq 1 ]
