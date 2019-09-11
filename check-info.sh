@@ -180,6 +180,7 @@ function  check_jar_version() {
 	echo "----------------------------" 
 	bcos_version=$(grep "bcos.version" $fisco_properties |awk -F"=" '{print $2}')
 	echo "the bcos version is: $bcos_version"
+	isSdk=1
 	for file in $libDir/*
 	do
 		file=${file##*/}
@@ -189,6 +190,7 @@ function  check_jar_version() {
 		fi
 		if [[ $file == weid-java-sdk* ]];
 		then
+			isSdk=0
 			echo "the weid java sdk jar: "$file
 		fi
 		if [[ $file == web3sdk*-1.* ]];
@@ -206,6 +208,21 @@ function  check_jar_version() {
 			fi
 		fi
 	done
+	
+	if [[ $isSdk == 1 ]];
+	then
+		if [ -d "./dist/app/" ];
+		then
+			for file in ./dist/app/*
+			do
+				file=${file##*/}
+				if [[ $file == weid-java-sdk* ]];
+				then
+					echo "the weid java sdk jar: $file"
+				fi
+			done
+		fi
+	fi
 }
 
 # check the node version
