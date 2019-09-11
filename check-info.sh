@@ -92,16 +92,29 @@ function check_gradle_version() {
 	if [ $? == 1 ] ; then
 		gradle -version
 	else
-		echo "ERROR: GRADLE_HOME is not set and no 'gradle' command could be found in your PATH.
+		echo "WARN: GRADLE_HOME is not set and no 'gradle' command could be found in your PATH.
 Please set the GRADLE_HOME variable in your environment to match the
 location of your Gradle installation."
+	fi
+}
+
+# check the fisco-solc version
+function check_fisco_solc_version() {
+	echo "----------------------------"
+	echo "4. FISCO-SOLC Version"
+	echo "----------------------------"
+	checkCommand fisco-solc
+	if [ $? == 1 ] ; then
+		fisco-solc --version
+	else
+		echo "no 'fisco-solc' command could be found in your PATH."
 	fi
 }
 
 # check the user configure
 function check_user_config() {
 	echo "----------------------------"
-	echo "4. User Config"
+	echo "5. User Config"
 	echo "----------------------------"
 	if [ ! -f "$fisco_properties" ];
 	then
@@ -176,7 +189,7 @@ function check_user_config() {
 # check the jar version
 function  check_jar_version() {
 	echo "----------------------------"
-	echo "5. Dependencies Jar Version"
+	echo "6. Dependencies Jar Version"
 	echo "----------------------------" 
 	bcos_version=$(grep "bcos.version" $fisco_properties |awk -F"=" '{print $2}')
 	echo "the bcos version is: $bcos_version"
@@ -228,7 +241,7 @@ function  check_jar_version() {
 # check the node version
 function check_node_version() {
 	echo "----------------------------"
-	echo "6. FISCO BCOS Version"
+	echo "7. FISCO BCOS Version"
 	echo "----------------------------"
 	isSdk=1
 	version_default=1.4
