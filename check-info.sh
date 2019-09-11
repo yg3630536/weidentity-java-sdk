@@ -107,7 +107,7 @@ function check_fisco_solc_version() {
 	if [ $? == 1 ] ; then
 		fisco-solc --version
 	else
-		echo "no 'fisco-solc' command could be found in your PATH."
+		echo "WARN: no 'fisco-solc' command could be found in your PATH."
 	fi
 }
 
