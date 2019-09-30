@@ -180,6 +180,7 @@ function check_user_config() {
 	    echo begin test $var
 		ip=`echo $var | cut -d : -f 1`
 		port=`echo $var | cut -d : -f 2`
+		ping -c 10 $ip
 		result=`echo -e "\n" | timeout 5 telnet $ip $port 2>/dev/null | grep Connected | wc -l`
 		if [ $result -eq 1 ]; then
 			echo "Network is Open."
