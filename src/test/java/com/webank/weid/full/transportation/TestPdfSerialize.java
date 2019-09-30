@@ -1,7 +1,5 @@
 package com.webank.weid.full.transportation;
 
-import java.io.OutputStream;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -93,6 +91,7 @@ public class TestPdfSerialize extends TestBaseTransportation {
     /**
      * 多CPT，指定已存在目录，不指定文件名，生成文件测试.
      */
+    @Test
     public void testSerializeCase31() {
         ResponseData<Boolean> response = TransportationFactory
                 .newPdfTransportation()
@@ -109,6 +108,7 @@ public class TestPdfSerialize extends TestBaseTransportation {
     /**
      * 多CPT，指定已存在目录,指定文件名，生成文件测试.
      */
+    @Test
     public void testSerializeCase32() {
         ResponseData<Boolean> response = TransportationFactory
                 .newPdfTransportation()
@@ -124,6 +124,7 @@ public class TestPdfSerialize extends TestBaseTransportation {
     /**
      * 多CPT测试，指定不存在目录,不指定文件名，生成文件测试.
      */
+    @Test
     public void testSerializeCase33() {
         ResponseData<Boolean> response = TransportationFactory
                 .newPdfTransportation()
@@ -139,6 +140,7 @@ public class TestPdfSerialize extends TestBaseTransportation {
     /**
      * 多CPT，指定已存在多层目录,不指定文件名，生成文件测试.
      */
+    @Test
     public void testSerializeCase34() {
         ResponseData<Boolean> response = TransportationFactory
                 .newPdfTransportation()
@@ -154,6 +156,7 @@ public class TestPdfSerialize extends TestBaseTransportation {
     /**
      * 多CPT测试，指定已存在多层目录,指定文件名，生成文件测试.
      */
+    @Test
     public void testSerializeCase35() {
         ResponseData<Boolean> response = TransportationFactory
                 .newPdfTransportation()
@@ -169,6 +172,7 @@ public class TestPdfSerialize extends TestBaseTransportation {
     /**
      * 多CPT测试，指定不存在多层目录,不指定文件名，生成文件测试.
      */
+    @Test
     public void testSerializeCase36() {
         ResponseData<Boolean> response = TransportationFactory
                 .newPdfTransportation()
@@ -184,6 +188,7 @@ public class TestPdfSerialize extends TestBaseTransportation {
     /**
      * 多CPT测试，指定已存在包含多个"."的路径，生成文件测试.
      */
+    @Test
     public void testSerializeCase37() {
         ResponseData<Boolean> response = TransportationFactory
                 .newPdfTransportation()
@@ -199,6 +204,7 @@ public class TestPdfSerialize extends TestBaseTransportation {
     /**
      * 多CPT测试，指定已存在包含多个"."的路径和文件名，生成文件测试.
      */
+    @Test
     public void testSerializeCase38() {
         ResponseData<Boolean> response = TransportationFactory
                 .newPdfTransportation()
@@ -214,6 +220,7 @@ public class TestPdfSerialize extends TestBaseTransportation {
     /**
      * 多CPT测试，指定不存在包含多个"."的路径和文件名，生成文件测试.
      */
+    @Test
     public void testSerializeCase39() {
         ResponseData<Boolean> response = TransportationFactory
                 .newPdfTransportation()
@@ -229,6 +236,7 @@ public class TestPdfSerialize extends TestBaseTransportation {
     /**
      * 多CPT测试，指定输出目录为空.
      */
+    @Test
     public void testSerializeCase310() {
         ResponseData<Boolean> response = TransportationFactory
                 .newPdfTransportation()
@@ -354,6 +362,7 @@ public class TestPdfSerialize extends TestBaseTransportation {
     /**
      * 指定PDF模板测试.
      */
+    @Test
     public void testSerializeCase91() {
         ResponseData<Boolean> response = TransportationFactory
                 .newPdfTransportation()
@@ -394,6 +403,7 @@ public class TestPdfSerialize extends TestBaseTransportation {
     /**
      * 指定复杂PDF模板测试.
      */
+    @Test
     public void testSerializeCase101() {
         ResponseData<Boolean> response = TransportationFactory
                 .newPdfTransportation()

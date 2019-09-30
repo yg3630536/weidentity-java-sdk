@@ -1,14 +1,9 @@
 package com.webank.weid.full.transportation;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.OutputStream;
-import java.util.HashMap;
 import java.util.List;
 
-import mockit.Mock;
-import mockit.MockUp;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -210,6 +205,7 @@ public class TestPdfDeserialize extends TestBaseTransportation {
     /**
      * 读入默认模板PDF文件反序列化.
      */
+    @Test
     public void testDeserializeCase8() {
 
         //1. 序列化presentation4MultiCpt为pdf文件
@@ -250,6 +246,7 @@ public class TestPdfDeserialize extends TestBaseTransportation {
     /**
      * 读入指定模板PDF文件反序列化.
      */
+    @Test
     public void testDeserializeCase9() {
 
         //1. 序列化presentation4MultiCpt为pdf文件
