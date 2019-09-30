@@ -37,7 +37,7 @@ public class TestRegisterCptStringArgsWithId extends TestBaseServcie {
     /**
      * case： build cpt string.
      */
-    // CI hold: @Test
+    @Test
     public void testRegisterCptStringArgs_success() throws IOException {
 
         CptStringArgs cptStringArgs =
@@ -58,7 +58,7 @@ public class TestRegisterCptStringArgsWithId extends TestBaseServcie {
     /**
      * case: when ctpid in [2000000,],register auth cpt Success.
      */
-    // CI hold: @Test
+    @Test
     public void testRegisterCptArgsWithId_registerAuthCptSuccess() throws Exception {
 
         CptStringArgs registerCptArgs =
@@ -202,7 +202,7 @@ public class TestRegisterCptStringArgsWithId extends TestBaseServcie {
     /**
      * case： used string-int build cpt string .
      */
-    // CI hold: @Test
+    @Test
     public void testRegisterStringCptArgs_CptJsonSchemaValueIsInt() throws IOException {
 
         CptStringArgs cptStringArgs =
@@ -358,7 +358,7 @@ public class TestRegisterCptStringArgsWithId extends TestBaseServcie {
     /**
      * case： build cpt string by file.
      */
-    // CI hold: @Test
+    @Test
     public void testRegisterStringCptArgs_fromFile() throws IOException {
 
         CptStringArgs cptStringArgs =
